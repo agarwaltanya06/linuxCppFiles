@@ -24,26 +24,26 @@ int main()
     int max_sd;   
     struct sockaddr_in address;   
          
-    char buffer[1025];  //data buffer of 1K  
+    char buffer[1025];  //data buffer  
          
     //set of socket descriptors  
     fd_set readfds;   
          
     //a message  
-    char *message = "ECHO Daemon v1.0 \r\n";   
+    char *message = "ECHO server connected. \r\n";   
      
-    //initialise all client_socket[] to 0 so not checked  
+    //initializing all client_socket[] to 0 so not checked  
     for (i = 0; i < max_clients; i++)   
     {   
         client_socket[i] = 0;   
     }   
          
-    //create a master socket  
+    //creating a master socket  
     int master_socket = socket(AF_INET , SOCK_STREAM , 0);
     if(master_socket == -1)	return -1;  
            
      
-    //set master socket to allow multiple connections  
+    //setting master socket to allow multiple connections  
     if(setsockopt(master_socket, SOL_SOCKET, SO_REUSEADDR, (char*)&opt,  
           sizeof(opt))<0 )   	return -2; 
     	
@@ -53,29 +53,29 @@ int main()
     address.sin_addr.s_addr = INADDR_ANY;   
     address.sin_port = htons( PORT );   
          
-    //bind the socket to localhost port 8888  
+    //binding the socket to localhost port 8888  
     if (bind(master_socket, (sockaddr*)&address, sizeof(address))<0)    
         return -3;  
 
     cout<<"Listener on port "<<PORT<<"\n";   
          
-    //try specifying max of 3 pending connections for the master socket  
+    //trying to specify max of 3 pending connections for the master socket  
     if (listen(master_socket,3) < 0)	return -4;  
          
-    //accept the incoming connection  
+    //accepting the incoming connection  
     addrlen = sizeof(address);   
     cout<<"Waiting for connections ..."<<"\n";   
          
     while(TRUE)   
     {   
-        //clear the socket set  
+        //clearing the socket set  
         FD_ZERO(&readfds);   
      
-        //add master socket to set  
+        //adding master socket to set  
         FD_SET(master_socket, &readfds);   
         max_sd = master_socket;   
              
-        //add child sockets to set  
+        //adding child sockets to set  
         for (i=0; i < max_clients ;i++)   
         {  
             //socket descriptor  
@@ -97,27 +97,26 @@ int main()
         if ((activity < 0) && (errno!=EINTR))	cout<<"select error";      
              
         //If something happened on the master socket ,  
-        //then its an incoming connection  
+        //then it's an incoming connection  
         if (FD_ISSET(master_socket, &readfds))   
         {   
-            new_socket = accept(master_socket,  
-                    (sockaddr *)&address, (socklen_t*)&addrlen);
+            new_socket = accept(master_socket, (sockaddr *)&address, (socklen_t*)&addrlen);
                     
              if(new_socket < 0)	return -5;  
  
              
-       //inform user of socket number - used in send and receive commands  
+            //informing user of socket number - used in send and receive commands  
             cout<<"New connection , socket fd is "<<new_socket<<
             ", ip is :"<<inet_ntoa(address.sin_addr)<<
             ", port : "<<ntohs(address.sin_port) <<"\n"; 
            
-            //send new connection greeting message  
+            //sending new connection greeting message  
             if(send(new_socket, message, strlen(message), 0) != strlen(message))   
                 cout<<"Error!"; 
                  
             cout<<"Welcome message sent successfully\n";   
                  
-            //add new socket to array of sockets  
+            //adding new socket to array of sockets  
             for (i = 0; i < max_clients; i++)   
             {   
                 //if position is empty  
@@ -131,7 +130,7 @@ int main()
             }   
         }   
              
-        //else its some IO operation on some other socket 
+        //else some IO operation on some other socket 
         for (i = 0; i < max_clients; i++)   
         {   
             sd = client_socket[i];   
@@ -144,22 +143,22 @@ int main()
                 printTimestamp();
                 if (valread == 0)   
                 {   
-                    //Somebody disconnected, get his details and print  
+                    //Some client disconnected, get its details and print  
                     getpeername(sd , (sockaddr*)&address , \ 
                         (socklen_t*)&addrlen);   
                     cout<<"Host disconnected , ip"<<
                     inet_ntoa(address.sin_addr)<<", port "<<
                     ntohs(address.sin_port) << "\n";   
                          
-                    //Close the socket and mark as 0 in list for reuse  
+                    //Closing the socket and marking as 0 in list for reuse  
                     close( sd );   
                     client_socket[i] = 0;   
                 }   
                      
-                //Echo back the message that came in  
+                //Echoing back the message that came in  
                 else 
                 {   
-                    //set the string terminating NULL byte on the end  
+                    //setting the string terminating NULL byte on the end  
                     //of the data read  
                     buffer[valread] = '\0';   
                     send(sd, buffer, strlen(buffer), 0 );   
