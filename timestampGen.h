@@ -1,15 +1,19 @@
- #include <chrono>
- #include <ctime>   
+#include <chrono>
+#include <ctime>   
  
- using namespace std;  
+using namespace std;  
         
 void printTimestamp()
 {       
-	std::chrono::time_point<std::chrono::system_clock> now =	std::chrono::system_clock::now();
+	
+	
+	//This is a function to print the current timestamp up to nanoseconds.
+	
+	
+	std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 	auto duration = now.time_since_epoch();
 
-	typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<8>
->::type> Days; 
+	typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<8>>::type> Days; 
 
 	Days days = std::chrono::duration_cast<Days>(duration);
     	duration -= days;
