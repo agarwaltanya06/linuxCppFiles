@@ -11,6 +11,11 @@
 
 using namespace std;
 
+/* This program connects to the server that accepts only a single client. 
+   It sends data to the server and receives the data echoed back from the server.
+   It also uses the chrono and ctime libraries to print duration taken (in ns) to execute the functions that send and receive data. */
+
+
 int main()
 {
     //	Create a socket
@@ -54,7 +59,7 @@ int main()
         auto t2 = std::chrono::high_resolution_clock::now();
         if (sendRes == -1)
         {
-            cout << "Could not send to server! Whoops!\r\n";
+            cout << "Could not send to server! \r\n";
             continue;
         }
         
@@ -66,7 +71,7 @@ int main()
 	auto t4 = std::chrono::high_resolution_clock::now();
         if (bytesReceived == -1)
         {
-            cout << "There was an error getting response from server\r\n";
+            cout << "There was an error getting response from the server.\r\n";
         }
         
         else
@@ -84,11 +89,12 @@ int main()
         std::cout<<duration1<<"\r\n";
         cout<<"Time taken to recv: ";
         std::cout<<duration2<<"\r\n";
-    } while(true);
+	    
+    }   while(true);
 
 
 
-    //	Close the socket
+    //Close the socket
     close(sock);
 
     return 0;
