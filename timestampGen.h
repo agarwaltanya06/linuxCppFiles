@@ -9,7 +9,7 @@ void printTimestamp()
 	auto duration = now.time_since_epoch();
 
 	typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<8>
->::type> Days; /* UTC: +8:00 */
+>::type> Days; 
 
 	Days days = std::chrono::duration_cast<Days>(duration);
     	duration -= days;
