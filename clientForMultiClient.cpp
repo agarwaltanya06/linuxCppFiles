@@ -12,6 +12,9 @@
 
 using namespace std;
 
+/* This test program allows a client to send data <Hi.> 10 times. It receives echoed data and prints time taken to send and receive data each time.
+   After this, the user on the client side may enter anything to send <Hi.> 10 more times/ <bye> or <quit> to close the connection. */
+
 int main()
 {
     //	Create a socket
@@ -60,8 +63,8 @@ int main()
     for(int j=0; j<10; j++)
     {
 
-        //Enter lines of text
-        userInput = "Hi!";
+        //Data to send to server
+        userInput = "Hi.";
 
 
         //Send to server
@@ -71,7 +74,7 @@ int main()
         auto t2 = std::chrono::high_resolution_clock::now();
         if (sendRes == -1)
         {
-            cout << "Could not send to server! Whoops!\r\n";
+            cout << "Could not send to server! \r\n";
             continue;
         }
         
@@ -83,7 +86,7 @@ int main()
 	auto t4 = std::chrono::high_resolution_clock::now();
         if (bytesReceived == -1)
         {
-            cout << "There was an error getting response from server\r\n";
+            cout << "There was an error getting response from the server.\r\n";
         }
         
         else
