@@ -17,6 +17,9 @@
      
 using namespace std;
 
+/* This program creates a server that allows up to 20 clients to connect to it.
+   It also prints the timestamp each time after receiving data from a client, and echoes back the data received to the same client. */
+
 int main()   
 {   
     int opt = TRUE;   
@@ -137,10 +140,11 @@ int main()
                  
             if (FD_ISSET(sd , &readfds))   
             {   
-                //Check if it was for closing , and also read the  
-                //incoming message  
+                //Check if it was for closing , and also read the incoming message  
                 valread = read(sd, buffer, 1024);
-                printTimestamp();
+                
+                //Print timestamp after receiving data
+                printTimestamp();  
                 if (valread == 0)   
                 {   
                     //Some client disconnected, get its details and print  
