@@ -10,13 +10,18 @@
  
 using namespace std;
  
+
+/*This program creates a server that accepts only a single client connection. It prints the timestamp after receiving any data from client.
+      It also echoes back the data that it receives to the client. */
+
+
 int main()
 {
     
+	
     // Creating a socket. Return if can't create socket.   
     int listeningSock = socket(AF_INET, SOCK_STREAM, 0);
     if (listeningSock == -1) return -1; 
- 
  
  
     /*Binding (ip address + port) to the socket. 
