@@ -32,18 +32,19 @@ int main()
     inet_pton(AF_INET, "0.0.0.0", &InputSocketAddress.sin_addr); 
     //inet_pton: an internet function, pointer to string (repr-ing a num?) 
  
-    if(bind(listeningSock, (sockaddr*)&InputSocketAddress,sizeof(InputSocketAddress)) == -1)
-    	return -2; 
+    if(bind(listeningSock, (sockaddr*)&InputSocketAddress,sizeof(InputSocketAddress)) == -1) return -2; 
     //2nd arg: ptr to input socket address.
-
 
  
     // Use socket for listening.
     if(listen(listeningSock, SOMAXCONN)==-1) return -3;
+	
+	
  
     // Wait for a connection
     sockaddr_in client;  
     socklen_t clientSize = sizeof(client);
+	
  
     int clientSocket = accept(listeningSock, (sockaddr*)&client, &clientSize);
  
@@ -59,7 +60,7 @@ int main()
     else
     {
         inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
-      //ntop-> networkto string ptr,"have to do manually is else condition"
+        //ntop-> networkto string ptr,"have to do manually is else condition"
         cout << host << " connected on port " << ntohs(client.sin_port) << endl;
     }
  
@@ -79,7 +80,8 @@ int main()
         int bytesReceived = recv(clientSocket, buf, 4096, 0);
 	
         
-        printTimestamp();
+	//printing timestamp after receiving data
+        printTimestamp();  
  	
         
         
