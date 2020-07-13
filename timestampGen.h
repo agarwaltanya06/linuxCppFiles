@@ -1,19 +1,17 @@
-#include <chrono>
-#include <ctime>   
+ #include <chrono>
+ #include <ctime>   
  
-using namespace std;  
+ using namespace std;  
+
+//This is a function to print the current timestamp up to nanoseconds
         
 void printTimestamp()
 {       
-	
-	
-	//This is a function to print the current timestamp up to nanoseconds.
-	
-	
 	std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 	auto duration = now.time_since_epoch();
 
-	typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<8>>::type> Days; 
+	typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<8>
+>::type> Days; /* UTC: +8:00 */
 
 	Days days = std::chrono::duration_cast<Days>(duration);
     	duration -= days;
@@ -35,13 +33,15 @@ void printTimestamp()
 
 	auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(duration);
 
-std::cout <<"Current time in hr:min:s:ms:us:ns = ";
+std::cout <<"Current time = ";
 
 std::cout << hours.count() << ":"
           << minutes.count() << ":"
           << seconds.count() << ":"
           << milliseconds.count() << ":"
           << microseconds.count() << ":"
-          << nanoseconds.count() << std::endl; 
+          << nanoseconds.count(); 
+          
+std::cout<<"  (hr:min:s:ms:us:ns)"<<endl;
         
 }
