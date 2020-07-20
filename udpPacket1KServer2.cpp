@@ -62,10 +62,10 @@ int main()
 	
 	int packetNum;
 	int clientNum;
-	int lastClient = -1;  //last client (1 or 2) from which data has been received
-	int overallReorder=0; 
-	int client1Over = -1; //is '1' when all client 1 data has been received
-	int client2Over = -1; //is '1' when all client 2 data has been received 
+//	int lastClient = -1;  //last client (1 or 2) from which data has been received
+//	int overallReorder=0; 
+//	int client1Over = -1; //is '1' when all client 1 data has been received
+//	int client2Over = -1; //is '1' when all client 2 data has been received 
 	
 	
 	int reorder1 = 0;    //reordering in client 1 packets
@@ -109,12 +109,12 @@ int main()
 			packetNum = stoi(s2);
 			clientNum = stoi(s3);
 			
-			
+/*			
 			//Measuring overall reordering between flows
 			if(lastClient == -1) lastClient = clientNum;
 			else if(lastClient!=clientNum) overallReorder++;
 			lastClient = clientNum; 
-			
+*/			
 			
 			//Measuring reordering within each flow
 			if(clientNum == 1){
@@ -172,7 +172,7 @@ int main()
 				timeDiff1 = 0;
 				totalTimeDiff1 = 0;
 				reorder1 = 0;
-				client1Over = 1;
+			//	client1Over = 1;
 				
 				}
 				
@@ -195,18 +195,18 @@ int main()
 				timeDiff2 = 0;
 				totalTimeDiff2 = 0;
 				reorder2 = 0;
-				client2Over = 1;
+			//	client2Over = 1;
 				}
 				
 				
 				//Printing overall reordering if all data has been received from both clients
-				if(client1Over==1 && client2Over==1){
+			/*	if(client1Over==1 && client2Over==1){
 				cout<<"\nOverall reordering: "<<overallReorder<<"\n";
 				overallReorder = 0;
 				client1Over = -1;
 				client2Over = -1;
 				
-				}
+				} */
 
 			}
 		}
