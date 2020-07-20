@@ -21,7 +21,14 @@ using namespace std;
 
 int main()
 {
-				
+	/*
+		This server:
+		1. Receives packets from client 1
+		2. Measures average delay due to sleep function in client 1
+		3. Measures average time taken for transmission of each packet from client to server
+	*/
+	
+	
     	int listeningSock = socket(AF_INET, SOCK_DGRAM, 0);
     	if (listeningSock == -1) return -1; 
 	
@@ -43,9 +50,9 @@ int main()
 	sockaddr_in client;	
 	socklen_t clientSize = sizeof(client);
 	
-	//to store time delay between every 10th and 11th packet
-	double timeDiff = 0;
-	double totalTimeDiff = 0;
+
+	double timeDiff = 0;  //to measure time delay due to sleep function
+	double totalTimeDiff = 0; // to measure total time taken to receive packets
 	int packetNum;
 	
 	int reorderingNum = 0;
