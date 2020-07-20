@@ -22,7 +22,18 @@ using namespace std;
 
 int main()
 {
-				
+	
+	/*
+			This server:
+			1. Measures packet reordering within 2 streams
+			2. Measures total time taken in receiving each stream's packets, and corresponding average time
+			3. Measures total time delay due to sleep function in each stream, and corresponding average time
+			4. The function to measure packet reordering across streams was written, but I had calculated something other than what we require. 
+	
+	*/
+	
+	
+	
     	int listeningSock = socket(AF_INET, SOCK_DGRAM, 0);
     	if (listeningSock == -1) return -1; 
 	
