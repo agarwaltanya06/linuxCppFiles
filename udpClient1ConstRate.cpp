@@ -23,6 +23,14 @@ using namespace std;
 
 int main(void)
 {
+	
+	/*
+		This client:
+		1. Sends 1000 packets to the common server ("udpPacket1KClient2")
+		2. Sleeps for 1 ms after sending every 10 packets
+	
+	*/
+	
 	struct sockaddr_in myaddr, remaddr;
 	int fd, slen=sizeof(remaddr);
 	char *server = "127.0.0.1";	
