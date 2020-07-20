@@ -56,7 +56,7 @@ int main(void)
 	int nextPacket=1; 
 	int i;
 		
-	int  iter = 1; //to count 'totalCycles' number of iterations
+	int  iter = 1; //to count 'totalCycles' number of iterations,
 		
 	
 	while(iter<=totalCycles)
@@ -72,11 +72,11 @@ int main(void)
 			oss2<<setw(4)<<setfill('0')<<i;
 	
 			s2.append(oss2.str());
-			s2.append(" from client 2.");
+			s2.append(" from client 1.");
 			s2.resize(BUFLEN-1);
 			strcpy(buf, s2.c_str());
 			
-			cout<<"Sending packet "<<i<<" from client 2 to "<<server<<" port "<<SERVICE_PORT<<"\n";
+			cout<<"Sending packet "<<i<<" from client 1 to "<<server<<" port "<<SERVICE_PORT<<"\n";
 
 			if(sendto(fd, buf, strlen(buf),0,(sockaddr *)&remaddr, slen)==-1)
 			{

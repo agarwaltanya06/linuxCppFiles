@@ -40,7 +40,7 @@ int main(void)
 
 	memset((char *) &remaddr, 0, sizeof(remaddr));
 	remaddr.sin_family = AF_INET;
-	remaddr.sin_port = htons(SERVICE_PORT);
+	remaddr.sin_port = htons(SERVICE_PORT_2);
 	if (inet_aton(server, &remaddr.sin_addr)==0) return -1;
 	
 	
@@ -76,7 +76,7 @@ int main(void)
 			s2.resize(BUFLEN-1);
 			strcpy(buf, s2.c_str());
 			
-			cout<<"Sending packet "<<i<<" from client 2 to "<<server<<" port "<<SERVICE_PORT<<"\n";
+			cout<<"Sending packet "<<i<<" from client 2 to "<<server<<" port "<<SERVICE_PORT_2<<"\n";
 
 			if(sendto(fd, buf, strlen(buf),0,(sockaddr *)&remaddr, slen)==-1)
 			{
